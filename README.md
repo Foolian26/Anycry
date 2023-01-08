@@ -56,7 +56,8 @@ if you read this, star the repo
 ```sh-session
 
 - Make every filetype decryptable(Masterpassword-guesser)
-- Make Folders decryptable
+- Make Folders encryptable/decryptable
+
 ```
 
 
