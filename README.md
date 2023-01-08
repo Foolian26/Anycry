@@ -36,8 +36,8 @@ if you read this, star the repo
 ## :fire: Features
 ```sh-session
 ✔ Does not require a Internet connection
-✔ Encrypts every possible filetype
-✔ Decrypts every possible filetype
+✔ Encrypts/Decrypts every possible filetype
+✔ Encrypts/Decrypts Folders
 ✔ Impossible to decrypt without masterpassword
 ✔ Masterpassword guesser with checker
 
@@ -56,7 +56,7 @@ if you read this, star the repo
 ```sh-session
 
 - Make every filetype decryptable(Masterpassword-guesser)
-- Make Folders encryptable/decryptable
+- ✔ Make Folders encryptable/decryptable
 
 ```
 
@@ -74,8 +74,11 @@ This project is licensed under the GPL General Public License v3.0 License
 
 ```diff
 
+v1.2.0 ⋮ 08-01-2023
++ Added Folder support
++ Cleaned up Code
 
-v1 ⋮ 06-01-2023
+v1.0 ⋮ 06-01-2023
 + Added Main Script
 ```
 
