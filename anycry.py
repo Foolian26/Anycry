@@ -32,7 +32,7 @@ menu ="""
 def select():
     System.Init()
     System.Clear()
-    System.Title("Anycry ꟾ 1.0 ꟾ \x46\x6F\x6F\x6C\x69\x61\x6E\x23\x36\x39\x38\x38")
+    System.Title("Anycry ꟾ 1.1 ꟾ \x46\x6F\x6F\x6C\x69\x61\x6E\x23\x36\x39\x38\x38")
     System.Size(100, 40)
     print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
     print(Colorate.Format(Center.XCenter(menu), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
@@ -68,6 +68,14 @@ def encrypt(file_name, password):
 
     with open(file_name + '.anycry', 'wb') as f:
         f.write(salt + iv + encrypted_data)
+
+def encrypt_folder(folder, password):
+    # Traverse the folder tree and encrypt the files
+    for root, dirs, files in os.walk(folder):
+        for file in files:
+            file_path = os.path.join(root, file)
+            encrypt(file_path, password)
+            os.remove(file_path)
 
 def decrypt_file(file_name, password):
     try:
@@ -117,88 +125,223 @@ def decrypt_file2(file_name, password):
 
         return False
 
+def decrypt_folder(folder, password):
+    # Traverse the folder tree and decrypt the files
+    for root, dirs, files in os.walk(folder):
+        for file in files:
+            file_path = os.path.join(root, file)
+            if decrypt_file(file_path, password):
+                # If the decryption is successful, delete the encrypted file
+                os.remove(file_path)
+
+
 def main2():
     System.Clear()
     print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
-    rgb("Enter the file to be decrypted >>>")
-    file_name = input('')
-    if os.path.isfile(file_name):
-        pass
-    else:
-        error("File does not exist")
-        main2()
     rgb("""
-        [1] Enter your own Password
-        [2] Use your own Password File
-    """)
-    choice = input("")
 
-    if choice == "1":
+                [1] Decrypt File
+
+                [2] Decrypt Folder
+
+            """)
+    cho = input("")
+
+    if cho == "2":
+
         System.Clear()
         print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
-        rgb("Enter Password to decrypt >>> ")
-        password3 = input()
-        if decrypt_file2(file_name, password3):
-
-            rgb(f"File decrypted successfully with password: {password3}")
-
+        rgb("Enter the Folder to be decrypted >>>")
+        folder_name = input('')
+        if os.path.exists(folder_name):
+            pass
         else:
-            rgb("Wrong Password")
+            error("Folder does not exist")
+            main2()
+        System.Clear()
+        print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+        rgb("""
 
-    elif choice == "2":
+                [1] Enter your own Password
+
+                [2] Use your own Password File
+
+            """)
+        choice = input("")
+
+        if choice == "1":
+            System.Clear()
+            print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+            rgb("Enter Password to decrypt >>> ")
+            password3 = input()
+            start = time.time()
+            decrypt_folder(folder_name, password3)
+            end = time.time()
+            sec = start - end
+            rgb(f"Folder decrypted successfully with password: {password3} in {sec}")
+
+        elif choice == "2":
+            """
+            System.Clear()
+            print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+            rgb("Enter Password File (Unformatted)")
+            password_file = input()
+
+            try:
+                with open(password_file, "r") as a:
+                    a.read()
+            except:
+                error("Password File does not exist")
+                main2()
+            num = 0
+            with open(password_file, 'r') as f:
+                for password in f:
+                    password = password.strip()
+                    num += 1
+                    rgb2(f"Testing {password} Attempt: {num}")
+                    if decrypt_folder(folder_name, password):
+                        rgb(f"Folder decrypted successfully with password: {password}")
+                        break
+                else:
+                    rgb(f"Could not decrypt folder with any of the given passwords.")
+            """
+            System.Clear()
+            print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+            rgb("Coming Soon...")
+
+        time.sleep(5)
+        select()
+    if cho == "1":
+        System.Clear()
+        print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+        rgb("Enter the file to be decrypted >>>")
+        file_name = input('')
+        if os.path.isfile(file_name):
+            pass
+        else:
+            error("File does not exist")
+            main2()
 
         System.Clear()
         print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
-        rgb("Enter Password File (Unformatted)")
-        password_file = input()
-        
-        try:
-            with open(password_file, "r") as a:
-                a.read()
-        except:
-            error("Password File does not exist")
-            main2()
-        num = 0
-        with open(password_file, 'r') as f:
-            for password in f:
-                password = password.strip()
-                num += 1
-                rgb2(f"Testing {password} Attempt: {num}")
-                if decrypt_file(file_name, password):
-                    rgb(f"File decrypted successfully with password: {password}")
-                    break
+        rgb("""
+
+                        [1] Enter your own Password
+
+                        [2] Use your own Password File
+
+                    """)
+        choice = input("")
+
+        if choice == "1":
+            System.Clear()
+            print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+            rgb("Enter Password to decrypt >>> ")
+            password3 = input()
+            if decrypt_file2(file_name, password3):
+
+                rgb(f"File decrypted successfully with password: {password3}")
+
             else:
-             rgb(f"Could not decrypt file with any of the given passwords.")
-    time.sleep(5)
-    select()
+                rgb("Wrong Password")
+
+        elif choice == "2":
+
+            System.Clear()
+            print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+            rgb("Enter Password File (Unformatted)")
+            password_file = input()
+
+            try:
+                with open(password_file, "r") as a:
+                    a.read()
+            except:
+                error("Password File does not exist")
+                main2()
+            num = 0
+            with open(password_file, 'r') as f:
+                for password in f:
+                    password = password.strip()
+                    num += 1
+                    rgb2(f"Testing {password} Attempt: {num}")
+                    if decrypt_file(file_name, password):
+                        rgb(f"File decrypted successfully with password: {password}")
+                        break
+                else:
+                    rgb(f"Could not decrypt file with any of the given passwords.")
+        time.sleep(5)
+        select()
+
 
 def main1():
     System.Clear()
     print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
-    rgb("Enter the file to be encrypted >>> ")
-    file = input()
-    if os.path.isfile(file):
-        pass
-    else:
-        error("File does not exist")
-        main1()
-    System.Clear()
-    print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
-    rgb("Enter the master password to be used for encryption >>> ")
-    password = input()
-    if password == "":
-        error("Do not enter a blank password")
-        main1()
-    else:
-        pass
-    start = time.time()
-    encrypt(file, password)
-    end = time.time()
-    total = end - start
+    rgb("""
+    
+            [1] Encrypt File
+            
+            [2] Encrypt Folder
+            
+        """)
+    cho = input("")
+    if cho == "1":
+        System.Clear()
+        print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+        rgb("Enter the file to be encrypted >>> ")
+        file = input()
+        if os.path.isfile(file):
+            pass
+        else:
+            error("File does not exist")
+            main1()
 
-    rgb(f"File encrypted successfully in {total}s")
-    time.sleep(5)
-    select()
+        System.Clear()
+        print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+        rgb("Enter the master password to be used for encryption >>> ")
+        password = input()
+        if password == "":
+            error("Do not enter a blank password")
+            main1()
+        else:
+            pass
+        start = time.time()
+        encrypt(file, password)
+        end = time.time()
+        total = end - start
+
+        rgb(f"File encrypted successfully in {total}s")
+        time.sleep(5)
+        select()
+
+    if cho == "2":
+        System.Clear()
+        print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+        rgb("Enter the Folder to be encrypted >>> ")
+        folder = input()
+        if os.path.exists(folder):
+            pass
+        else:
+            error("Folder does not exist")
+            main1()
+
+        System.Clear()
+        print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
+        rgb("Enter the master password to be used for encryption >>> ")
+        password = input()
+        if password == "":
+            error("Do not enter a blank password")
+            main1()
+        else:
+            pass
+        start = time.time()
+        encrypt_folder(folder, password)
+        end = time.time()
+        total = end - start
+
+        rgb(f"Folder encrypted successfully in {total}s")
+        time.sleep(5)
+        select()
+
 
 if __name__ == '__main__':
     select()
