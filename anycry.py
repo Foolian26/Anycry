@@ -70,7 +70,7 @@ def encrypt(file_name, password):
         f.write(salt + iv + encrypted_data)
 
 def encrypt_folder(folder, password):
-    # Traverse the folder tree and encrypt the files
+    
     for root, dirs, files in os.walk(folder):
         for file in files:
             file_path = os.path.join(root, file)
@@ -126,12 +126,12 @@ def decrypt_file2(file_name, password):
         return False
 
 def decrypt_folder(folder, password):
-    # Traverse the folder tree and decrypt the files
+    
     for root, dirs, files in os.walk(folder):
         for file in files:
             file_path = os.path.join(root, file)
             if decrypt_file(file_path, password):
-                # If the decryption is successful, delete the encrypted file
+                
                 os.remove(file_path)
 
 
