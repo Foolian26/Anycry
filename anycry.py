@@ -34,6 +34,7 @@ def select():
     System.Clear()
     System.Title("Anycry ꟾ 1.1 ꟾ \x46\x6F\x6F\x6C\x69\x61\x6E\x23\x36\x39\x38\x38")
     System.Size(100, 40)
+    Anime.Fade(text=Center.Center(logo), color=Colors.red_to_white, mode=Colorate.Horizontal, enter=True)
     print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
     print(Colorate.Format(Center.XCenter(menu), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
     choice = input()
@@ -70,7 +71,7 @@ def encrypt(file_name, password):
         f.write(salt + iv + encrypted_data)
 
 def encrypt_folder(folder, password):
-    
+
     for root, dirs, files in os.walk(folder):
         for file in files:
             file_path = os.path.join(root, file)
@@ -126,12 +127,12 @@ def decrypt_file2(file_name, password):
         return False
 
 def decrypt_folder(folder, password):
-    
+
     for root, dirs, files in os.walk(folder):
         for file in files:
             file_path = os.path.join(root, file)
             if decrypt_file(file_path, password):
-                
+
                 os.remove(file_path)
 
 
