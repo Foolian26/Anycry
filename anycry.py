@@ -1,10 +1,12 @@
 from pystyle import *
+from sys import executable
+from Crypto.Cipher import AES
+from Crypto.Protocol.KDF import PBKDF2
 import ctypes
 import base64
 import os
-from Crypto.Cipher import AES
-from Crypto.Protocol.KDF import PBKDF2
 import time
+import subprocess
 
 whiteChars = list('@')
 
@@ -28,8 +30,19 @@ menu ="""
 [2] Decrypt
 
 """
-
+def pipinstaller():
+    requirements = [
+        ["pystyle"],
+        ["Crypto.Cipher", "pycryptodome"]
+    ]
+    for modl in requirements:
+        try:
+            __import__(modl[0])
+        except:
+            subprocess.Popen(f"{executable} -m pip install {modl[1]}", shell=True)
+            time.sleep(3)
 def select():
+    pipinstaller()
     System.Init()
     System.Clear()
     System.Title("Anycry ꟾ 1.1 ꟾ \x46\x6F\x6F\x6C\x69\x61\x6E\x23\x36\x39\x38\x38")
