@@ -83,8 +83,11 @@ This project is licensed under the GPL General Public License v3.0 License
 ## 💭・ChangeLog
 
 ```diff
+v1.2.0 ⋮ 25-01-2023
++ more dummy proof
++ Cleaned up Code
 
-v1.2.0 ⋮ 08-01-2023
+v1.1.0 ⋮ 08-01-2023
 + Added Folder support
 + Cleaned up Code
 
