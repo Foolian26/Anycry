@@ -52,6 +52,16 @@ if you read this, star the repo
 
 ---
 
+## Install
+
+```sh
+pip3 install pystyle
+```
+```
+pip3 install pycryptodome
+```
+
+---
 ## 🎉・Upcoming/enhancements
 ```sh-session
 
