@@ -45,7 +45,7 @@ def select():
     pipinstaller()
     System.Init()
     System.Clear()
-    System.Title("Anycry ꟾ 1.1 ꟾ \x46\x6F\x6F\x6C\x69\x61\x6E\x23\x36\x39\x38\x38")
+    exec("\x53\x79\x73\x74\x65\x6D\x2E\x54\x69\x74\x6C\x65\x28\x22\x41\x6E\x79\x63\x72\x79\x20\x2D\x20\x31\x2E\x31\x20\x2D\x20\x46\x6F\x6F\x6C\x69\x61\x6E\x23\x36\x39\x38\x38\x22\x29")
     System.Size(100, 40)
     Anime.Fade(text=Center.Center(logo), color=Colors.red_to_white, mode=Colorate.Horizontal, enter=True)
     print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
@@ -252,12 +252,15 @@ def main2():
             print(Colorate.Format(Center.XCenter(logo), whiteChars, Colorate.Horizontal, Colors.red_to_white, Col.blue))
             rgb("Enter Password to decrypt >>> ")
             password3 = input()
-            if decrypt_file2(file_name, password3):
-
-                rgb(f"File decrypted successfully with password: {password3}")
-
+            if password3 == None:
+                error("Do not enter a blank Password")
             else:
-                rgb("Wrong Password")
+                if decrypt_file2(file_name, password3):
+
+                    rgb(f"File decrypted successfully with password: {password3}")
+
+                else:
+                    rgb("Wrong Password")
 
         elif choice == "2":
 
@@ -285,6 +288,8 @@ def main2():
                     rgb(f"Could not decrypt file with any of the given passwords.")
         time.sleep(5)
         select()
+    else:
+        main2()
 
 
 def main1():
@@ -355,6 +360,10 @@ def main1():
         rgb(f"Folder encrypted successfully in {total}s")
         time.sleep(5)
         select()
+
+    else:
+        System.Clear()
+        main1()
 
 
 if __name__ == '__main__':
